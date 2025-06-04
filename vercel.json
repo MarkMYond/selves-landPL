@@ -1,0 +1,14 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "version": 2,
+  "functions": {
+    "**/*.func": {
+      "runtime": "nodejs20.x"
+    }
+  },
+  "github": {
+    "silent": true,
+    "autoAlias": true,
+    "autoJobCancelation": true
+  }
+}
