@@ -157,4 +157,5 @@ export default buildConfig({
     'https://taash.ai', // New frontend domain
     // Add your Vercel deployment URLs here for production if needed
   ],
+  // Trigger Vercel deploy
 })
