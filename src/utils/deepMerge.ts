@@ -13,9 +13,9 @@ export default function deepMerge<T extends object = object, R extends object = 
         const sourceValue = source[key as keyof R];
 
         if (isObject(targetValue) && isObject(sourceValue)) {
-          deepMerge(targetValue, sourceValue);
+          deepMerge(targetValue as object, sourceValue as object);
         } else {
-          target[key as keyof T] = sourceValue;
+          target[key as keyof T] = sourceValue as any;
         }
       });
     }
