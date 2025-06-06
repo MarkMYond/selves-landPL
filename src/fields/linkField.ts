@@ -9,7 +9,6 @@ export const internalLinkField = (overrides: Partial<Field> = {}): Field => ({
   admin: {
     condition: (_: any, siblingData: any) => siblingData?.type === 'internal',
   },
-  // ...overrides, 
 })
 
 export const externalLinkField = (overrides: Partial<Field> = {}): Field => ({
@@ -19,7 +18,6 @@ export const externalLinkField = (overrides: Partial<Field> = {}): Field => ({
   admin: {
     condition: (_: any, siblingData: any) => siblingData?.type === 'external',
   },
-  // ...overrides, 
 })
 
 export const linkField = (overrides: Partial<Field> = {}): Field => ({
@@ -55,5 +53,4 @@ export const linkField = (overrides: Partial<Field> = {}): Field => ({
       defaultValue: false,
     },
   ],
-  // ...overrides, 
 })

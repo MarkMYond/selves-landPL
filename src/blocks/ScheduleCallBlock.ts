@@ -1,6 +1,5 @@
-import type { Block, Field } from 'payload' // Ensure Field is imported if used for options
+import type { Block, Field } from 'payload'
 
-// Define options arrays if they are specific to this block, otherwise they could be imported
 const colorOptions: { label: string; value: string }[] = [
   { label: 'White', value: 'white' },
   { label: 'Light Grey', value: 'light-grey' },
@@ -13,12 +12,12 @@ const containerWidthOptions: { label: string; value: string }[] = [
   { label: 'Default (max-w-7xl for this block)', value: 'default' },
   { label: 'Medium (max-w-5xl)', value: 'medium' },
   { label: 'Wide (max-w-7xl)', value: 'wide' },
-  { label: 'Full Width', value: 'full' }, // Changed 'max-w-none' to 'full'
+  { label: 'Full Width', value: 'full' },
 ];
 
 export const ScheduleCallBlock: Block = {
-  slug: 'scheduleCallSection', // Matches the slug from the error
-  interfaceName: 'ScheduleCallBlockPayload', // To avoid conflict with Vue prop type
+  slug: 'scheduleCallSection',
+  interfaceName: 'ScheduleCallBlockPayload',
   fields: [
     {
       name: 'sectionBackgroundColor',
@@ -62,8 +61,8 @@ export const ScheduleCallBlock: Block = {
           label: 'Header Link (Optional)',
           type: 'group',
           fields: [
-            { name: 'text', type: 'text', label: 'Link Text' }, // Changed 'label' to 'text' and added Label
-            { name: 'url', type: 'text', label: 'Link URL' }, // Added Label
+            { name: 'text', type: 'text', label: 'Link Text' },
+            { name: 'url', type: 'text', label: 'Link URL' },
           ],
         },
         { name: 'infoColumnMainTitlePart1', type: 'text', label: 'Main Title - Part 1' },
@@ -80,8 +79,8 @@ export const ScheduleCallBlock: Block = {
           label: 'Footer Links (Optional)',
           type: 'array',
           fields: [
-            { name: 'text', type: 'text', label: 'Link Text', required: true }, // Changed 'label' to 'text' and added Label
-            { name: 'url', type: 'text', label: 'Link URL', required: true }, // Added Label
+            { name: 'text', type: 'text', label: 'Link Text', required: true },
+            { name: 'url', type: 'text', label: 'Link URL', required: true },
           ],
         },
       ],
@@ -92,7 +91,6 @@ export const ScheduleCallBlock: Block = {
       type: 'group',
       fields: [
         { name: 'formTitle', type: 'text', label: 'Form Title' },
-        // formFields are hardcoded in the frontend, so no Payload field needed here for them.
       ],
     },
   ],

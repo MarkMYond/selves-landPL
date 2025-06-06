@@ -2,8 +2,7 @@ import type { CollectionConfig } from 'payload';
 import { slugField } from '../fields/slug';
 import { seoField } from '../fields/seo';
 
-// Import Blocks
-import ContentBlock from '../blocks/ContentBlock'; // Default import
+import ContentBlock from '../blocks/ContentBlock';
 import { ImageBlock } from '../blocks/ImageBlock';
 import { FeatureSectionBlock } from '../blocks/FeatureSectionBlock';
 import { ClientLogosBlock } from '../blocks/ClientLogosBlock';
@@ -14,15 +13,11 @@ import { TextImageSectionBlock } from '../blocks/TextImageSectionBlock';
 import { ApproachTabsBlock } from '../blocks/ApproachTabsBlock';
 import { CustomizedApproachBlock } from '../blocks/CustomizedApproachBlock';
 import { CaseStudySectionBlock } from '../blocks/CaseStudySectionBlock';
-import { TemplateSectionBlock } from '../blocks/TemplateSectionBlock';
-import { RelatedTemplateSectionBlock } from '../blocks/RelatedTemplateSectionBlock';
 import { CtaSectionBlock } from '../blocks/CtaSectionBlock';
-import { NewTemplatesSectionBlock } from '../blocks/NewTemplatesSectionBlock';
 import { ProductFeaturesBlock } from '../blocks/ProductFeaturesBlock';
 import { SectorsSectionBlock } from '../blocks/SectorsSectionBlock';
 import { ScheduleCallBlock } from '../blocks/ScheduleCallBlock';
 import { PricingPlansBlock } from '../blocks/PricingPlansBlock';
-import { TravelersBlock } from '../blocks/TravelersBlock';
 import { Home03Hero } from '../blocks/Home03Hero';
 import { BrandLogos } from '../blocks/BrandLogos';
 import { BenefitsSectionBlock } from '../blocks/BenefitsSection';
@@ -32,11 +27,11 @@ import { WhatMakesUsDifferentSection } from '../blocks/WhatMakesUsDifferentSecti
 import { IntegrationsSection } from '../blocks/IntegrationsSection';
 import { TestimonialsSection } from '../blocks/TestimonialsSection';
 import { FeaturesWithIntroSectionBlock } from '../blocks/FeaturesWithIntroSectionBlock';
-import { Hero02Block } from '../blocks/Hero02Block'; // Added import
+import { Hero02Block } from '../blocks/Hero02Block';
 import { WhyChooseUsSectionBlock } from '../blocks/WhyChooseUsSectionBlock';
 import { HeroBlogCardBlock } from '../blocks/HeroBlogCardBlock';
 import { RecentArticlesBlock } from '../blocks/RecentArticlesBlock';
-import { ContactFormBlock } from '../blocks/ContactFormBlock'; // Added import
+import { ContactFormBlock } from '../blocks/ContactFormBlock';
 
 const AllWebPageBlocks = [
   ContentBlock,
@@ -50,15 +45,11 @@ const AllWebPageBlocks = [
   ApproachTabsBlock,
   CustomizedApproachBlock,
   CaseStudySectionBlock,
-  TemplateSectionBlock,
-  RelatedTemplateSectionBlock,
   CtaSectionBlock,
-  NewTemplatesSectionBlock,
   ProductFeaturesBlock,
   SectorsSectionBlock,
   ScheduleCallBlock,
   PricingPlansBlock,
-  TravelersBlock,
   Home03Hero,
   BrandLogos,
   BenefitsSectionBlock,
@@ -68,11 +59,11 @@ const AllWebPageBlocks = [
   IntegrationsSection,
   TestimonialsSection,
   FeaturesWithIntroSectionBlock,
-  Hero02Block, // Added block
+  Hero02Block,
   WhyChooseUsSectionBlock,
   HeroBlogCardBlock,
   RecentArticlesBlock,
-  ContactFormBlock, // Added to this specific list for WebPages
+  ContactFormBlock,
 ];
 
 const WebPages: CollectionConfig = {
@@ -82,10 +73,8 @@ const WebPages: CollectionConfig = {
     defaultColumns: ['title', 'slug', 'updatedAt'],
     description: 'General website pages (e.g., Homepage).',
     group: 'Content Management',
-    preview: (doc: any) => { 
-      // Basic preview link, assuming slug is used directly.
-      // This might need adjustment based on frontend routing.
-      const baseUrl = process.env.NUXT_PUBLIC_SITE_URL || 'http://localhost:3000'; // Default to common dev port
+    preview: (doc: any) => {
+      const baseUrl = process.env.NUXT_PUBLIC_SITE_URL || 'http://localhost:3000';
       if (doc?.slug === 'home') {
         return baseUrl;
       }
@@ -93,7 +82,7 @@ const WebPages: CollectionConfig = {
     },
   },
   access: {
-    read: () => true, 
+    read: () => true,
   },
   fields: [
     {
@@ -102,8 +91,8 @@ const WebPages: CollectionConfig = {
       type: 'text',
       required: true,
     },
-    slugField('title'), // Uses the title field to generate the slug
-    seoField(), // Adds SEO metadata group
+    slugField('title'),
+    seoField(),
     {
       name: 'layout',
       label: 'Page Layout',
@@ -114,7 +103,7 @@ const WebPages: CollectionConfig = {
     },
   ],
   timestamps: true,
-  versions: false, // Keep versions disabled
+  versions: false,
 };
 
 export default WebPages;

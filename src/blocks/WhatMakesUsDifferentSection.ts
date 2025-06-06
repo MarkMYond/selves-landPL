@@ -28,7 +28,7 @@ export const WhatMakesUsDifferentSection: Block = {
       label: 'Benefit Cards',
       type: 'array',
       minRows: 1,
-      maxRows: 3, // Based on the example from home-01 which has 3 cards
+      maxRows: 3,
       fields: [
         {
           name: 'icon',
@@ -82,10 +82,6 @@ export const WhatMakesUsDifferentSection: Block = {
             },
           ],
         },
-        // Note: The complex decorative images within cards from the Webflow example
-        // (e.g., card-img-1, card-img-2) are not included as individual fields here.
-        // They would typically be handled by static styling within the Vue component,
-        // possibly varied by card index or a 'styleVariant' field if needed.
       ],
     },
   ],

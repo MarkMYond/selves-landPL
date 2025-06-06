@@ -18,13 +18,13 @@ export const BrandLogos: Block = {
       label: 'Logos',
       type: 'array',
       minRows: 1,
-      maxRows: 20, // Adjust as needed
+      maxRows: 20,
       fields: [
         {
           name: 'logoImage',
           label: 'Logo Image',
           type: 'upload',
-          relationTo: 'media', // Assuming your media collection is named 'media'
+          relationTo: 'media',
           required: true,
         },
         {

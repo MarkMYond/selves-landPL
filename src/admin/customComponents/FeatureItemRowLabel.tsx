@@ -3,7 +3,6 @@ import React from 'react';
 export interface RowLabelProps {
   data: { title?: string; [key: string]: any };
   index: number;
-  // path?: string; // Often provided, but let's keep it simple based on current usage
 }
 
 const FeatureItemRowLabel: React.FC<RowLabelProps> = ({ data, index }) => {

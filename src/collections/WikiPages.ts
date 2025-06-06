@@ -2,24 +2,21 @@ import type { CollectionConfig, CollectionAfterChangeHook, CollectionAfterDelete
 import { generateWikiNavigation } from '../hooks/generateWikiNavigation';
 import { slugField } from '../fields/slug';
 import { seoField } from '../fields/seo';
-import ContentBlock from '../blocks/ContentBlock'; // Default import
+import ContentBlock from '../blocks/ContentBlock';
 
-// After change/delete hooks to regenerate the wiki navigation
 const afterChangeHook: CollectionAfterChangeHook = async ({ req }) => {
-  console.log('Wiki page changed, regenerating navigation...');
   try {
     await generateWikiNavigation(req.payload);
   } catch (error) {
-    console.error('Error regenerating wiki navigation after change:', error);
+    // console.error('Error regenerating wiki navigation after change:', error);
   }
 };
 
 const afterDeleteHook: CollectionAfterDeleteHook = async ({ req }) => {
-  console.log('Wiki page deleted, regenerating navigation...');
   try {
     await generateWikiNavigation(req.payload);
   } catch (error) {
-    console.error('Error regenerating wiki navigation after delete:', error);
+    // console.error('Error regenerating wiki navigation after delete:', error);
   }
 };
 
@@ -29,7 +26,7 @@ const WikiPages: CollectionConfig = {
     useAsTitle: 'title',
     defaultColumns: ['title', 'category', 'status', 'updatedAt'],
     description: 'Pages for the wiki section.',
-    group: 'Content Management',
+    group: 'Wiki & Registry',
     preview: (doc: any) => {
       const baseUrl = process.env.NUXT_PUBLIC_SITE_URL || 'http://localhost:3000';
       return doc?.slug ? `${baseUrl}/wiki/${doc.slug}` : null;
@@ -61,7 +58,7 @@ const WikiPages: CollectionConfig = {
       label: 'Page Content',
       type: 'blocks',
       minRows: 1,
-      blocks: [ContentBlock], // Only allow the simple ContentBlock
+      blocks: [ContentBlock],
       required: true,
     },
     {
@@ -104,16 +101,16 @@ const WikiPages: CollectionConfig = {
       name: 'parent',
       label: 'Parent Page',
       type: 'relationship',
-      relationTo: 'wiki-pages', // Self-relation for hierarchy
+      relationTo: 'wiki-pages',
       admin: {
         position: 'sidebar',
       },
       index: true,
     },
     {
-      name: 'icon', // Example, you might use a text field for icon class names
+      name: 'icon',
       label: 'Icon (e.g., Phosphor Icon name)',
-      type: 'text', 
+      type: 'text',
       admin: {
         position: 'sidebar',
         description: 'Optional icon name for navigation display.',

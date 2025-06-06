@@ -7,10 +7,10 @@ const Categories: CollectionConfig = {
     useAsTitle: 'name',
     defaultColumns: ['name', 'parent', 'updatedAt'],
     description: 'Organize pages into hierarchical categories.',
-    group: 'Content Management', // Optional: Group in admin UI
+    group: 'Content Management',
   },
   access: {
-    read: () => true, 
+    read: () => true,
   },
   fields: [
     {
@@ -30,7 +30,7 @@ const Categories: CollectionConfig = {
       },
     },
     {
-      name: 'sort', // Optional: for manual sorting if needed
+      name: 'sort',
       label: 'Sort Order',
       type: 'number',
       admin: {
@@ -41,7 +41,7 @@ const Categories: CollectionConfig = {
     },
   ],
   timestamps: true,
-  versions: false, // Keep versions disabled as per original
+  versions: false,
 }
 
 export default Categories;

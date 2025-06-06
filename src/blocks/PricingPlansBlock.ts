@@ -1,6 +1,5 @@
 import type { Block, Field } from 'payload'
 
-// Reusable color options (can be imported from a shared file if used in many blocks)
 const sectionColorOptions: { label: string; value: string }[] = [
   { label: 'White', value: 'white' },
   { label: 'Light Grey', value: 'light-grey' },
@@ -9,21 +8,19 @@ const sectionColorOptions: { label: string; value: string }[] = [
   { label: 'Brand Primary', value: 'brand-primary' },
 ];
 
-// Options for card background colors (could be text if more flexibility is needed)
 const cardBgColorOptions: { label: string; value: string }[] = [
     { label: 'White', value: 'bg-white' },
     { label: 'Light Grey', value: 'bg-light-grey' },
-    { label: 'Sand', value: 'bg-sand' }, // Example, assuming 'bg-sand' is a defined Tailwind class
+    { label: 'Sand', value: 'bg-sand' },
     { label: 'Brand 50', value: 'bg-brand-50' },
 ];
 
 export const PricingPlansBlock: Block = {
-  slug: 'pricingPlans', 
-  interfaceName: 'PricingPlansBlock', 
+  slug: 'pricingPlans',
+  interfaceName: 'PricingPlansBlock',
   fields: [
-    // Top-level fields for the block (title, CTA, background, padding)
     {
-      name: 'eyebrowText', // Added eyebrowText
+      name: 'eyebrowText',
       label: 'Section Eyebrow Text',
       type: 'text',
     },
@@ -112,7 +109,7 @@ export const PricingPlansBlock: Block = {
         {
           name: 'cardBackgroundColor',
           label: 'Card Background Color',
-          type: 'select', // Or 'text' if users should input Tailwind classes directly
+          type: 'select',
           options: cardBgColorOptions,
           defaultValue: 'bg-white',
           admin: {
@@ -137,10 +134,8 @@ export const PricingPlansBlock: Block = {
           type: 'checkbox',
           defaultValue: false,
         },
-        // Individual features array per plan is removed from here.
       ],
     },
-    // Shared features list for comparison
     {
       name: 'sharedFeatures',
       label: 'Shared Features List (for comparison table and plan cards)',
@@ -219,7 +214,6 @@ export const PricingPlansBlock: Block = {
         }
       ],
     },
-    // Fields for the "Compare Plans" table title section (optional)
     {
       name: 'compareTableTitle',
       label: 'Compare Table Section Title',

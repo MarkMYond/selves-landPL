@@ -1,10 +1,5 @@
 import type { CollectionConfig } from 'payload';
 
-/**
- * Collection for caching navigation structures
- * This replaces the static JSON files with a MongoDB-based solution
- * that works well with serverless environments like Vercel
- */
 const NavigationCache: CollectionConfig = {
   slug: 'navigation-cache',
   admin: {
@@ -27,7 +22,6 @@ const NavigationCache: CollectionConfig = {
       options: [
         { label: 'Wiki', value: 'wiki' },
         { label: 'Registry', value: 'registry' },
-        // Add more sections as needed
       ],
       required: true,
       unique: true,
@@ -57,7 +51,6 @@ const NavigationCache: CollectionConfig = {
   hooks: {
     beforeChange: [
       ({ data }) => {
-        // Set the lastGenerated date to now
         return {
           ...data,
           lastGenerated: new Date(),

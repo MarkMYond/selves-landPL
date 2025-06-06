@@ -1,6 +1,6 @@
-import type { Block, Field } from 'payload' // Added Field
-import { createBackgroundColorField } from '../fields/backgroundColor' // Import reusable background color field
-import { containerWidthField } from '../fields/containerWidth' // Import reusable container width field
+import type { Block, Field } from 'payload'
+import { createBackgroundColorField } from '../fields/backgroundColor'
+import { containerWidthField } from '../fields/containerWidth'
 
 export const FeatureSectionBlock: Block = {
   slug: 'featureSection',
@@ -10,14 +10,11 @@ export const FeatureSectionBlock: Block = {
     plural: 'Feature Sections',
   },
   fields: [
-    // Use reusable background color fields
     createBackgroundColorField('sectionBackgroundColor', 'Section Background Color'),
     createBackgroundColorField('contentBackgroundColor', 'Content Background Color'),
-    // Add container width field
     containerWidthField,
-    // Image Position field removed
     {
-      name: 'superTitle', // Added superTitle field
+      name: 'superTitle',
       label: 'Super Title (Optional)',
       type: 'text',
     },
@@ -41,23 +38,23 @@ export const FeatureSectionBlock: Block = {
       },
     },
     {
-      name: 'description', // Renamed back from subtitle
+      name: 'description',
       label: 'Description (Optional)',
       type: 'textarea',
     },
     {
       name: 'image',
-      label: 'Image (Optional)', // Made optional
+      label: 'Image (Optional)',
       type: 'upload',
       relationTo: 'media',
-      required: false, // Changed to false
+      required: false,
     },
     {
       name: 'button',
       label: 'Button (Optional)',
       type: 'group',
       admin: {
-        condition: (_, siblingData: any) => siblingData.includeButton, // Added type, Only show if checkbox is checked
+        condition: (_, siblingData: any) => siblingData.includeButton,
       },
       fields: [
         { name: 'text', type: 'text', required: true },
@@ -73,20 +70,19 @@ export const FeatureSectionBlock: Block = {
           defaultValue: 'primary',
           required: true,
         },
-        // Ensuring buttonPosition field is definitely removed
       ]
     },
     {
-      name: 'includeButton', // Checkbox to conditionally show the button group
+      name: 'includeButton',
       label: 'Include Button?',
       type: 'checkbox',
       defaultValue: false,
       admin: {
-        position: 'sidebar', // Place checkbox in sidebar for cleaner layout
+        position: 'sidebar',
       }
     },
     {
-      name: 'removeBottomPadding', // New checkbox field
+      name: 'removeBottomPadding',
       label: 'Remove Bottom Padding?',
       type: 'checkbox',
       defaultValue: false,
@@ -95,6 +91,5 @@ export const FeatureSectionBlock: Block = {
         description: 'Check this to remove the default bottom padding from this section.',
       }
     }
-    // Optional: Add layout options (e.g., image left/right) if needed
   ],
 }

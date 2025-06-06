@@ -1,7 +1,5 @@
-import type { GlobalConfig } from 'payload' // Corrected import path
+import type { GlobalConfig } from 'payload'
 
-// Define an array of color options that can be mapped to Tailwind classes in the frontend component
-// Copied from RecentArticlesBlock.ts for consistency
 const eyebrowBgColorOptions = [
   { label: 'Theme Color 1 (Purple)', value: 'theme-color-01' },
   { label: 'Theme Color 2 (Green)', value: 'theme-color-02' },
@@ -11,17 +9,16 @@ const eyebrowBgColorOptions = [
   { label: 'Green', value: 'green' },   
   { label: 'Yellow', value: 'yellow' }, 
   { label: 'Purple Light', value: 'purple-light' }, 
-  { label: 'Default (Theme Color 2)', value: 'default' } 
+  { label: 'Default (Theme Color 2)', value: 'default' }
 ];
 
 export const Footer: GlobalConfig = {
   slug: 'footer',
   label: 'Footer Content',
   access: {
-    read: () => true, // Publicly readable
+    read: () => true,
   },
   fields: [
-    // CTA Section Fields
     {
       name: 'ctaEnable',
       label: 'Enable CTA Section Above Footer',
@@ -88,9 +85,8 @@ export const Footer: GlobalConfig = {
         description: 'Optional: Image displayed in the CTA section, typically on the right.',
       },
     },
-    // Existing Footer Fields
     {
-      name: 'logo', 
+      name: 'logo',
       label: 'Footer Logo (Optional - currently hardcoded in frontend)',
       type: 'upload',
       relationTo: 'media',
@@ -171,7 +167,7 @@ export const Footer: GlobalConfig = {
     {
       name: 'copyright',
       label: 'Copyright Text (can include simple HTML)',
-      type: 'textarea', // Changed from richText to textarea
+      type: 'textarea',
       required: true,
     },
   ],

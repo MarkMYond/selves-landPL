@@ -2,9 +2,8 @@ import type { CollectionConfig, CollectionAfterChangeHook, CollectionAfterDelete
 import { generateRegistryNavigation } from '../hooks/generateRegistryNavigation';
 import { slugField } from '../fields/slug';
 import { seoField } from '../fields/seo';
-import ContentBlock from '../blocks/ContentBlock'; // Default import
+import ContentBlock from '../blocks/ContentBlock';
 
-// After change/delete hooks to regenerate the registry navigation
 const afterChangeHook: CollectionAfterChangeHook = async ({ req }) => {
   console.log('Registry page changed, regenerating navigation...');
   try {
@@ -27,9 +26,9 @@ const RegistryPages: CollectionConfig = {
   slug: 'registry-pages',
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'category', 'status', 'updatedAt'],
+    defaultColumns: ['title', 'category', 'slug', 'status', 'updatedAt'],
     description: 'Pages for the registry section.',
-    group: 'Content Management',
+    group: 'Wiki & Registry',
     preview: (doc: any) => {
       const baseUrl = process.env.NUXT_PUBLIC_SITE_URL || 'http://localhost:3000';
       return doc?.slug ? `${baseUrl}/registry/${doc.slug}` : null;
@@ -50,18 +49,18 @@ const RegistryPages: CollectionConfig = {
       name: 'category',
       label: 'Category',
       type: 'relationship',
-      relationTo: 'categories', 
+      relationTo: 'categories',
       required: false,
       admin: {
         position: 'sidebar',
       },
     },
     {
-      name: 'pageBuilder', // Changed from 'layout' to 'pageBuilder' for consistency if desired
+      name: 'pageBuilder',
       label: 'Page Content',
       type: 'blocks',
       minRows: 1,
-      blocks: [ContentBlock], // Only allow the simple ContentBlock
+      blocks: [ContentBlock],
       required: true,
     },
     {
@@ -104,16 +103,16 @@ const RegistryPages: CollectionConfig = {
       name: 'parent',
       label: 'Parent Page',
       type: 'relationship',
-      relationTo: 'registry-pages', // Self-relation for hierarchy
+      relationTo: 'registry-pages',
       admin: {
         position: 'sidebar',
       },
       index: true,
     },
     {
-      name: 'icon', 
+      name: 'icon',
       label: 'Icon (e.g., Phosphor Icon name)',
-      type: 'text', 
+      type: 'text',
       admin: {
         position: 'sidebar',
         description: 'Optional icon name for navigation display.',

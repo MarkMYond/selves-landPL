@@ -36,7 +36,7 @@ export const seoField = (): Field => {
         name: 'image',
         label: 'Social Sharing Image',
         type: 'upload',
-        relationTo: 'media', // Assumes 'media' collection exists
+        relationTo: 'media',
         admin: {
           description: 'Image used when sharing this page on social media (1200×630px recommended).',
         },

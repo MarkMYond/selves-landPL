@@ -1,9 +1,9 @@
-import type { Block } from 'payload' // React import no longer needed here if component is external
+import type { Block } from 'payload'
 import { TextImageSectionBlock } from './TextImageSectionBlock'
 
 export const FeaturesWithIntroSectionBlock: Block = {
   slug: 'featuresWithIntroSection',
-  interfaceName: 'FeaturesWithIntroSectionBlock', // Ensure this is unique
+  interfaceName: 'FeaturesWithIntroSectionBlock',
   labels: {
     singular: 'Features with Intro Section',
     plural: 'Features with Intro Sections',
@@ -32,14 +32,12 @@ export const FeaturesWithIntroSectionBlock: Block = {
         { label: 'None (Transparent)', value: 'none' },
         { label: 'White', value: 'white' },
         { label: 'Brand Lighter (brand-50)', value: 'brand-50' },
-        // Add other specific content background colors if needed
       ],
       defaultValue: 'none',
       admin: {
         description: 'Select the background color for the content area within the section padding.',
       },
     },
-    // containerWidth field removed
     {
       name: 'removeTopPadding',
       label: 'Remove Top Padding',
@@ -63,7 +61,7 @@ export const FeaturesWithIntroSectionBlock: Block = {
           type: 'text',
         },
         {
-          name: 'eyebrowBackgroundColor', // Matches SectionHeader prop name convention better than superTitleBackgroundColor
+          name: 'eyebrowBackgroundColor',
           label: 'Super Title Background Color',
           type: 'select',
           required: false,
@@ -89,7 +87,7 @@ export const FeaturesWithIntroSectionBlock: Block = {
           type: 'textarea',
         },
         {
-          name: 'titleImage', // Matches SectionHeader prop name
+          name: 'titleImage',
           label: 'Intro Title Image (Optional)',
           type: 'upload',
           relationTo: 'media',
@@ -105,7 +103,6 @@ export const FeaturesWithIntroSectionBlock: Block = {
       label: 'Feature Items (Text-Image Sections)',
       type: 'array',
       minRows: 1,
-      // Filter out section-level controls, ensuring field has a 'name' property for type safety
       fields: TextImageSectionBlock.fields.filter(field => 
         'name' in field && 
         typeof field.name === 'string' && 
@@ -119,7 +116,7 @@ export const FeaturesWithIntroSectionBlock: Block = {
       ),
       admin: {
         components: {
-          RowLabel: '@/admin/customComponents/FeatureItemRowLabel', // Use string path
+          RowLabel: '@/admin/customComponents/FeatureItemRowLabel',
         },
       },
     },

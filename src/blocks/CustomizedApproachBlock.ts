@@ -1,9 +1,7 @@
-import type { Block, Field } from 'payload'; // Corrected import path & Added Field
-import { createBackgroundColorField } from '../fields/backgroundColor'; // Import reusable background color field
-import { containerWidthField } from '../fields/containerWidth'; // Import reusable container width field
-// import { internalName } from '../fields/internalName'; // Removed import
-// import { backgroundColor } from '../fields/backgroundColor'; // Removed import
-import { ApproachTabsBlock } from './ApproachTabsBlock'; // Import the field definition
+import type { Block, Field } from 'payload';
+import { createBackgroundColorField } from '../fields/backgroundColor';
+import { containerWidthField } from '../fields/containerWidth';
+import { ApproachTabsBlock } from './ApproachTabsBlock';
 
 export const CustomizedApproachBlock: Block = {
   slug: 'customizedApproach',
@@ -12,17 +10,13 @@ export const CustomizedApproachBlock: Block = {
     plural: 'Customized Approach Sections',
   },
   fields: [
-    // Removed internalName field
-    // Use reusable background color fields
     createBackgroundColorField('sectionBackgroundColor', 'Section Background Color'),
     createBackgroundColorField('contentBackgroundColor', 'Content Background Color'),
-    // Add container width field
     containerWidthField,
     {
       name: 'title',
       label: 'Section Title',
       type: 'text',
-      // Example: "Our customized approach"
     },
     {
       name: 'description',
@@ -30,12 +24,12 @@ export const CustomizedApproachBlock: Block = {
       type: 'textarea',
     },
     {
-      name: 'approachTabsData', // This name must match the property in the Vue component type
+      name: 'approachTabsData',
       label: 'Approach Tabs Configuration',
-      type: 'blocks', // Corrected typo: should be plural 'blocks'
-      blocks: [ApproachTabsBlock], // Only allow the ApproachTabsBlock here
+      type: 'blocks',
+      blocks: [ApproachTabsBlock],
       required: true,
-      maxRows: 1, // Only one nested tabs block makes sense here
+      maxRows: 1,
     },
   ],
 };

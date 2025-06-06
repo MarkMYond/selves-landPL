@@ -1,15 +1,14 @@
 import type { Block } from 'payload'
 
-// Define an array of color options that can be mapped to Tailwind classes in the frontend component
 const logoBgColorOptions = [
-  { label: 'Theme Color 1 (Purple)', value: 'theme-color-01' }, // e.g., bg-purple-100 or a custom var
-  { label: 'Theme Color 2 (Green)', value: 'theme-color-02' }, // e.g., bg-green-100
-  { label: 'Theme Color 3 (Blue)', value: 'theme-color-03' },   // e.g., bg-blue-100
-  { label: 'Theme Color 4 (Yellow)', value: 'theme-color-04' }, // e.g., bg-yellow-100
-  { label: 'Purple', value: 'purple' },                       // e.g., bg-purple-500
-  { label: 'Green', value: 'green' },                         // e.g., bg-green-500
-  { label: 'Yellow', value: 'yellow' },                       // e.g., bg-yellow-500
-  { label: 'Purple Light', value: 'purple-light' },           // e.g., bg-purple-200 (for bg-purple-2)
+  { label: 'Theme Color 1 (Purple)', value: 'theme-color-01' },
+  { label: 'Theme Color 2 (Green)', value: 'theme-color-02' },
+  { label: 'Theme Color 3 (Blue)', value: 'theme-color-03' },
+  { label: 'Theme Color 4 (Yellow)', value: 'theme-color-04' },
+  { label: 'Purple', value: 'purple' },
+  { label: 'Green', value: 'green' },
+  { label: 'Yellow', value: 'yellow' },
+  { label: 'Purple Light', value: 'purple-light' },
   { label: 'Default (Light Gray)', value: 'default' }
 ];
 

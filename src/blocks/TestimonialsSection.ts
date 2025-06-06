@@ -1,6 +1,5 @@
 import type { Block } from 'payload'
 
-// Define an array of color options that can be mapped to Tailwind classes in the frontend component
 const logoBgColorOptions = [
   { label: 'Theme Color 1 (Purple)', value: 'theme-color-01' },
   { label: 'Theme Color 2 (Green)', value: 'theme-color-02' },
@@ -33,38 +32,37 @@ export const TestimonialsSection: Block = {
       label: 'Title',
       type: 'text',
       required: true,
-      defaultValue: 'Our Case Studies', // Updated default title
+      defaultValue: 'Our Case Studies',
     },
     {
       name: 'description',
       label: 'Description',
       type: 'textarea',
-      // defaultValue can be removed or updated if a default description for case studies is desired
       defaultValue:
-        'Discover how our clients have leveraged our solution to achieve their goals.', // Updated default description
+        'Discover how our clients have leveraged our solution to achieve their goals.',
     },
     {
-      name: 'caseStudies', // Renamed from 'testimonials'
-      label: 'Case Studies', // Updated label
+      name: 'caseStudies',
+      label: 'Case Studies',
       type: 'array',
       minRows: 1,
-      maxRows: 6, // Adjust as needed
+      maxRows: 6,
       fields: [
         {
-          name: 'quoteTitle', // New field
+          name: 'quoteTitle',
           label: 'Quote Title',
           type: 'text',
-          required: false, // Optional
+          required: false,
         },
         {
           name: 'quote',
-          label: 'Quote / Summary', // Updated label
+          label: 'Quote / Summary',
           type: 'textarea',
           required: true,
         },
         {
           name: 'authorName',
-          label: 'Company Name / Author', // Updated label
+          label: 'Company Name / Author',
           type: 'text',
           required: true,
         },
@@ -79,12 +77,12 @@ export const TestimonialsSection: Block = {
         },
         {
           name: 'authorRole',
-          label: 'Industry / Author Role', // Updated label
+          label: 'Industry / Author Role',
           type: 'text',
         },
         {
-          name: 'companyLogo', // Renamed from authorImage
-          label: 'Company Logo', // Updated label
+          name: 'companyLogo',
+          label: 'Company Logo',
           type: 'upload',
           relationTo: 'media',
           admin: {
@@ -99,7 +97,7 @@ export const TestimonialsSection: Block = {
           defaultValue: 'default',
         },
         {
-          name: 'readMoreLink', // New field
+          name: 'readMoreLink',
           label: 'Read More Link (URL)',
           type: 'text',
           admin: {

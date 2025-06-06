@@ -1,9 +1,8 @@
 import type { FieldHook } from 'payload'
 import type { Field } from 'payload'
-import deepMerge from '../utils/deepMerge' 
-import formatSlug from '../utils/formatSlug' 
+import deepMerge from '../utils/deepMerge'
+import formatSlug from '../utils/formatSlug'
 
-// Hook to format the slug from the source field
 const format =
   (fallback: string): FieldHook =>
   ({ value, originalDoc, data }) => {
@@ -19,7 +18,6 @@ const format =
     return value
   }
 
-// Define the slug field configuration
 type Slug = (fieldToUse?: string, overrides?: Partial<Field>) => Field
 
 export const slugField: Slug = (fieldToUse = 'title', overrides = {}) =>
@@ -28,7 +26,7 @@ export const slugField: Slug = (fieldToUse = 'title', overrides = {}) =>
       name: 'slug',
       label: 'Slug',
       type: 'text',
-      index: true, 
+      index: true,
       required: true,
       admin: {
         position: 'sidebar',
@@ -37,7 +35,7 @@ export const slugField: Slug = (fieldToUse = 'title', overrides = {}) =>
       hooks: {
         beforeValidate: [format(fieldToUse)],
       },
-      unique: true, 
+      unique: true,
       validate: (val: unknown) => {
         if (typeof val === 'string' && !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(val)) {
           return 'Slug can only contain lowercase letters, numbers, and hyphens.'
