@@ -196,6 +196,7 @@ export default buildConfig({
   ],
   cors: [
     'http://localhost:3000',
+    'http://localhost:3001', // Add Nuxt dev server origin
     process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:3333',
     'https://taash-payld.vercel.app',
     'https://fetest-bay.vercel.app',
@@ -205,6 +206,7 @@ export default buildConfig({
   ],
   csrf: [
     'http://localhost:3000',
+    'http://localhost:3001', // Add Nuxt dev server origin
     process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:3333',
     'https://taash-payld.vercel.app',
     'https://fetest-bay.vercel.app',
