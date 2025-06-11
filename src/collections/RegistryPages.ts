@@ -119,6 +119,25 @@ const RegistryPages: CollectionConfig = {
       },
     },
     {
+      name: 'iconBackgroundColor',
+      label: 'Icon Background Color',
+      type: 'select',
+      options: [
+        { label: 'None', value: 'none' },
+        { label: 'Theme Light Purple', value: 'bg-brandTheme-01' },
+        { label: 'Theme Light Blue', value: 'bg-brandTheme-02' },
+        { label: 'Theme Light Green', value: 'bg-brandTheme-03' },
+        { label: 'Theme Light Yellow', value: 'bg-brandTheme-04' },
+        { label: 'Pink Light', value: 'bg-pink-light' },
+        { label: 'Purple Light', value: 'bg-purple-light' },
+      ],
+      defaultValue: 'none',
+      admin: {
+        position: 'sidebar',
+        description: 'Background color for the icon circle. Select "None" for no background.',
+      },
+    },
+    {
       name: 'backgroundSettings',
       label: 'Micro Header',
       type: 'group',
