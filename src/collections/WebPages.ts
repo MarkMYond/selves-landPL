@@ -1,4 +1,6 @@
 import type { CollectionConfig } from 'payload';
+// import { generateSeoDataHook } from '../hooks/generateSeoData'; // Removing hook
+// import GenerateSeoButton from '../admin/components/GenerateSeoButton'; // Removing custom button import
 import { slugField } from '../fields/slug';
 import { seoField } from '../fields/seo';
 
@@ -73,6 +75,15 @@ const WebPages: CollectionConfig = {
     defaultColumns: ['title', 'slug', 'updatedAt'],
     description: 'General website pages (e.g., Homepage).',
     group: 'Content Management',
+    // components: { // Removing custom button component
+    //   views: {
+    //     edit: { 
+    //       Header: {
+    //         Component: GenerateSeoButton, 
+    //       },
+    //     }
+    //   }
+    // },
     preview: (doc: any) => {
       const baseUrl = process.env.NUXT_PUBLIC_SITE_URL || 'http://localhost:3000';
       if (doc?.slug === 'home') {
@@ -104,6 +115,9 @@ const WebPages: CollectionConfig = {
   ],
   timestamps: true,
   versions: false,
+  // hooks: { // Removing hook
+  //   beforeChange: [generateSeoDataHook],
+  // },
 };
 
 export default WebPages;

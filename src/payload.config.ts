@@ -22,6 +22,8 @@ import NavigationCache from './collections/NavigationCache'
 
 import Footer from './globals/Footer'
 
+import { generateSeoEndpoint } from './endpoints/generate-seo'; // Import the new endpoint
+
 import ContentBlock from './blocks/ContentBlock';
 import { ImageBlock } from './blocks/ImageBlock';
 import { FeatureSectionBlock } from './blocks/FeatureSectionBlock';
@@ -189,7 +191,8 @@ export default buildConfig({
           );
         }
       },
-    }
+    },
+    generateSeoEndpoint, // Add the new endpoint here
   ],
   cors: [
     'http://localhost:3000',

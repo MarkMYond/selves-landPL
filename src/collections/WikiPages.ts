@@ -1,5 +1,6 @@
 import type { CollectionConfig, CollectionAfterChangeHook, CollectionAfterDeleteHook } from 'payload';
 import { generateWikiNavigation } from '../hooks/generateWikiNavigation';
+// import { generateSeoDataHook } from '../hooks/generateSeoData'; // Removing hook
 import { slugField } from '../fields/slug';
 import { seoField } from '../fields/seo';
 import ContentBlock from '../blocks/ContentBlock';
@@ -180,6 +181,7 @@ const WikiPages: CollectionConfig = {
   timestamps: true,
   versions: false,
   hooks: {
+    // beforeChange: [generateSeoDataHook], // Removing hook
     afterChange: [afterChangeHook],
     afterDelete: [afterDeleteHook],
   },

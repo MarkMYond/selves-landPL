@@ -92,6 +92,15 @@ export const seoField = (): Field => {
           description: 'Comma-separated keywords (optional).',
         },
       },
+      {
+        name: 'jsonLD',
+        label: 'Schema.org JSON-LD',
+        type: 'json',
+        admin: {
+          description: 'Automatically generated Schema.org JSON-LD markup. Can be overridden if needed.',
+          readOnly: false, // Or true if you only want it to be system-generated
+        }
+      }
     ],
   };
 };
