@@ -106,6 +106,15 @@ export const WhyChooseUsSectionBlock: Block = {
           type: 'textarea',
           required: true,
         },
+        {
+          name: 'invertStyle',
+          label: 'Invert Card Style (Colored Background, White Icon Background)',
+          type: 'checkbox',
+          defaultValue: false,
+          admin: {
+            description: 'If checked, the card will have a colored background (using the Icon Background Color) and the icon will have a white background.',
+          },
+        },
       ],
     },
   ],

@@ -3,7 +3,7 @@ import type { Block, Field } from 'payload' // Import Field
 const colorOptions: { label: string; value: string }[] = [
   { label: 'White', value: 'white' },
   { label: 'Light Grey', value: 'light-grey' },
-  { label: 'Brand 50', value: 'brand-50' },
+  { label: 'Theme Color 1 (Lavender)', value: 'brand-50' }, // Updated label for brand-50
   { label: 'Brand 900', value: 'brand-900' },
   { label: 'Brand Primary', value: 'brand-primary' },
 ];

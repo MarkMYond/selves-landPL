@@ -16,7 +16,7 @@ export const FeaturesWithIntroSectionBlock: Block = {
       options: [
         { label: 'None (Transparent)', value: 'none' },
         { label: 'White', value: 'white' },
-        { label: 'Brand Lighter (brand-50)', value: 'brand-50' },
+        { label: 'Theme Color 1 (Lavender)', value: 'brand-50' }, // Updated label for brand-50
         { label: 'Gradient', value: 'gradient' },
       ],
       defaultValue: 'none',
@@ -31,7 +31,7 @@ export const FeaturesWithIntroSectionBlock: Block = {
       options: [
         { label: 'None (Transparent)', value: 'none' },
         { label: 'White', value: 'white' },
-        { label: 'Brand Lighter (brand-50)', value: 'brand-50' },
+        { label: 'Theme Color 1 (Lavender)', value: 'brand-50' }, // Updated label for brand-50
       ],
       defaultValue: 'none',
       admin: {

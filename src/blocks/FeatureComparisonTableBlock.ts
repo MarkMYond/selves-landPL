@@ -1,4 +1,4 @@
-import type { Block, Field } from 'payload'
+import type { Block, Field } from 'payload';
 
 const sectionColorOptions: { label: string; value: string }[] = [
   { label: 'White', value: 'white' },
@@ -8,16 +8,9 @@ const sectionColorOptions: { label: string; value: string }[] = [
   { label: 'Brand Primary', value: 'brand-primary' },
 ];
 
-const cardBgColorOptions: { label: string; value: string }[] = [
-    { label: 'White', value: 'bg-white' },
-    { label: 'Light Grey', value: 'bg-light-grey' },
-    { label: 'Sand', value: 'bg-sand' },
-    { label: 'Theme Color 1 (Lavender)', value: 'bg-brand-50' }, // Updated label for bg-brand-50
-];
-
-export const PricingPlansBlock: Block = {
-  slug: 'pricingPlans',
-  interfaceName: 'PricingPlansBlock',
+export const FeatureComparisonTableBlock: Block = {
+  slug: 'featureComparisonTable',
+  interfaceName: 'FeatureComparisonTableBlock',
   fields: [
     {
       name: 'eyebrowText',
@@ -28,29 +21,18 @@ export const PricingPlansBlock: Block = {
       name: 'title',
       label: 'Section Title',
       type: 'text',
-      defaultValue: 'Plans for every stage of your company',
+      defaultValue: 'Compare Our Plans',
     },
     {
-      name: 'mainCtaText',
-      label: 'Main CTA Button Text',
-      type: 'text',
-      defaultValue: 'Get Started',
+      name: 'description',
+      label: 'Section Description',
+      type: 'textarea',
     },
     {
-      name: 'mainCtaLink',
-      label: 'Main CTA Button Link',
-      type: 'text',
-      defaultValue: '/contact-us',
-    },
-    {
-      name: 'mainCtaStyle',
-      label: 'Main CTA Button Style',
-      type: 'select',
-      options: [
-        { label: 'Primary', value: 'primary' },
-        { label: 'Secondary', value: 'secondary' },
-      ],
-      defaultValue: 'primary',
+      name: 'headerImage',
+      label: 'Header Image (Optional)',
+      type: 'upload',
+      relationTo: 'media',
     },
     {
       name: 'sectionBackgroundColor',
@@ -71,66 +53,22 @@ export const PricingPlansBlock: Block = {
       type: 'checkbox',
       defaultValue: false,
     },
-    // Plans definition (up to 3 plans)
     {
-      name: 'plans',
-      label: 'Pricing Plans (Define up to 3)',
+      name: 'planHeaders',
+      label: 'Plan Headers for Table (Define up to 3)',
       type: 'array',
       minRows: 1,
-      maxRows: 3, 
+      maxRows: 3,
       fields: [
         {
           name: 'name',
-          label: 'Plan Name',
+          label: 'Plan Name for Header',
           type: 'text',
           required: true,
         },
         {
-          name: 'description',
-          label: 'Plan Description',
-          type: 'textarea',
-        },
-        {
-          name: 'monthlyPrice',
-          label: 'Monthly Price (e.g., $29, POA)',
-          type: 'text',
-        },
-        {
-          name: 'annualPrice',
-          label: 'Annual Price (e.g., $290, Optional)',
-          type: 'text',
-        },
-        {
-          name: 'priceSuffix',
-          label: 'Price Suffix (e.g., /month, /user/month)',
-          type: 'text',
-          defaultValue: '/month',
-        },
-        {
-          name: 'cardBackgroundColor',
-          label: 'Card Background Color',
-          type: 'select',
-          options: cardBgColorOptions,
-          defaultValue: 'bg-white',
-          admin: {
-            description: 'Select a background color for this plan card. Ensure the Tailwind class exists.',
-          }
-        },
-        {
-          name: 'ctaButtonLabel',
-          label: 'CTA Button Label',
-          type: 'text',
-          defaultValue: 'Get Started',
-        },
-        {
-          name: 'ctaButtonLink',
-          label: 'CTA Button Link URL',
-          type: 'text',
-          defaultValue: '/contact-us',
-        },
-        {
-          name: 'isMostPopular',
-          label: 'Is this the most popular plan?',
+          name: 'isMostPopular', // To allow highlighting a column
+          label: 'Is this the most popular plan column?',
           type: 'checkbox',
           defaultValue: false,
         },
@@ -138,7 +76,7 @@ export const PricingPlansBlock: Block = {
     },
     {
       name: 'sharedFeatures',
-      label: 'Shared Features List (for comparison table and plan cards)',
+      label: 'Shared Features List',
       type: 'array',
       fields: [
         {
@@ -147,9 +85,10 @@ export const PricingPlansBlock: Block = {
           type: 'text',
           required: true,
         },
+        // Availability for up to 3 plans, matching the maxRows of planHeaders
         {
           name: 'plan1Availability',
-          label: 'Plan 1 Availability',
+          label: 'Plan 1 Column Availability',
           type: 'select',
           options: [
             { label: 'Included (Checkmark)', value: 'included' },
@@ -157,10 +96,13 @@ export const PricingPlansBlock: Block = {
             { label: 'Custom Text', value: 'custom' },
           ],
           defaultValue: 'not_included',
+          admin: {
+            description: 'Corresponds to the first plan defined in Plan Headers.',
+          },
         },
         {
           name: 'plan1CustomText',
-          label: 'Plan 1 Custom Text (if "Custom Text" selected)',
+          label: 'Plan 1 Column Custom Text',
           type: 'text',
           admin: {
             condition: (_, siblingData) => siblingData.plan1Availability === 'custom',
@@ -168,7 +110,7 @@ export const PricingPlansBlock: Block = {
         },
         {
           name: 'plan2Availability',
-          label: 'Plan 2 Availability',
+          label: 'Plan 2 Column Availability',
           type: 'select',
           options: [
             { label: 'Included (Checkmark)', value: 'included' },
@@ -176,10 +118,13 @@ export const PricingPlansBlock: Block = {
             { label: 'Custom Text', value: 'custom' },
           ],
           defaultValue: 'not_included',
+          admin: {
+            description: 'Corresponds to the second plan defined in Plan Headers (if it exists).',
+          },
         },
         {
           name: 'plan2CustomText',
-          label: 'Plan 2 Custom Text',
+          label: 'Plan 2 Column Custom Text',
           type: 'text',
           admin: {
             condition: (_, siblingData) => siblingData.plan2Availability === 'custom',
@@ -187,7 +132,7 @@ export const PricingPlansBlock: Block = {
         },
         {
           name: 'plan3Availability',
-          label: 'Plan 3 Availability',
+          label: 'Plan 3 Column Availability',
           type: 'select',
           options: [
             { label: 'Included (Checkmark)', value: 'included' },
@@ -195,10 +140,13 @@ export const PricingPlansBlock: Block = {
             { label: 'Custom Text', value: 'custom' },
           ],
           defaultValue: 'not_included',
+          admin: {
+            description: 'Corresponds to the third plan defined in Plan Headers (if it exists).',
+          },
         },
         {
           name: 'plan3CustomText',
-          label: 'Plan 3 Custom Text',
+          label: 'Plan 3 Column Custom Text',
           type: 'text',
           admin: {
             condition: (_, siblingData) => siblingData.plan3Availability === 'custom',
@@ -209,21 +157,10 @@ export const PricingPlansBlock: Block = {
           label: 'Tooltip/Info Text (Optional)',
           type: 'text',
           admin: {
-            description: 'Short explanation for the feature, shown on hover or info icon.'
-          }
-        }
+            description: 'Short explanation for the feature, shown on hover or info icon.',
+          },
+        },
       ],
-    },
-    {
-      name: 'compareTableTitle',
-      label: 'Compare Table Section Title',
-      type: 'text',
-      defaultValue: 'Compare our plans',
-    },
-    {
-      name: 'compareTableDescription',
-      label: 'Compare Table Section Description',
-      type: 'textarea',
     },
   ],
 };

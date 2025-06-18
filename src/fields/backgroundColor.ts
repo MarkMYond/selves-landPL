@@ -3,7 +3,7 @@ import type { Field } from 'payload'
 export const backgroundColorOptions = [
   { label: 'None', value: 'none' },
   { label: 'White', value: 'white' },
-  { label: 'Primary Light', value: 'brand-50' },
+  { label: 'Theme Color 1 (Lavender)', value: 'brand-50' }, // Updated label for brand-50
   { label: 'Gradient', value: 'gradient' },
 ]
 

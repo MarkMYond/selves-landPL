@@ -19,7 +19,9 @@ import { CtaSectionBlock } from '../blocks/CtaSectionBlock';
 import { ProductFeaturesBlock } from '../blocks/ProductFeaturesBlock';
 import { SectorsSectionBlock } from '../blocks/SectorsSectionBlock';
 import { ScheduleCallBlock } from '../blocks/ScheduleCallBlock';
-import { PricingPlansBlock } from '../blocks/PricingPlansBlock';
+// import { PricingPlansBlock } from '../blocks/PricingPlansBlock'; // Old block
+import { PricingCardsBlock } from '../blocks/PricingCardsBlock'; // New block
+import { FeatureComparisonTableBlock } from '../blocks/FeatureComparisonTableBlock'; // New block
 import { Home03Hero } from '../blocks/Home03Hero';
 import { BrandLogos } from '../blocks/BrandLogos';
 import { BenefitsSectionBlock } from '../blocks/BenefitsSection';
@@ -51,7 +53,9 @@ const AllWebPageBlocks = [
   ProductFeaturesBlock,
   SectorsSectionBlock,
   ScheduleCallBlock,
-  PricingPlansBlock,
+  // PricingPlansBlock, // Old block removed
+  PricingCardsBlock, // New block added
+  FeatureComparisonTableBlock, // New block added
   Home03Hero,
   BrandLogos,
   BenefitsSectionBlock,
