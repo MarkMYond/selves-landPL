@@ -1,5 +1,5 @@
 import { Payload } from 'payload';
-import type { Category, RegistryPage } from '../payload-types'; // Assuming RegistryPage type exists
+import type { Category, RegistryPage } from '../../../frontend/src/payload-types'; // Assuming RegistryPage type exists
 
 interface NavItem {
   id: string;

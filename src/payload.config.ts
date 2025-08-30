@@ -19,71 +19,38 @@ import WebPages from './collections/WebPages'
 import WikiPages from './collections/WikiPages'
 import RegistryPages from './collections/RegistryPages'
 import NavigationCache from './collections/NavigationCache'
+import PageTemplate from './collections/PageTemplate'
 
 import Footer from './globals/Footer'
 
 import { generateSeoEndpoint } from './endpoints/generate-seo'; // Import the new endpoint
 
 import ContentBlock from './blocks/ContentBlock';
-import { ImageBlock } from './blocks/ImageBlock';
 import { FeatureSectionBlock } from './blocks/FeatureSectionBlock';
-import { ClientLogosBlock } from './blocks/ClientLogosBlock';
-import { SolutionsListBlock } from './blocks/SolutionsListBlock';
-import { AiSupportSectionBlock } from './blocks/AiSupportSectionBlock';
-import { SupportNinjaSectionBlock } from './blocks/SupportNinjaSectionBlock';
-import { TextImageSectionBlock } from './blocks/TextImageSectionBlock';
-import { ApproachTabsBlock } from './blocks/ApproachTabsBlock';
-import { CustomizedApproachBlock } from './blocks/CustomizedApproachBlock';
-import { CaseStudySectionBlock } from './blocks/CaseStudySectionBlock';
-import { CtaSectionBlock } from './blocks/CtaSectionBlock';
-import { ProductFeaturesBlock } from './blocks/ProductFeaturesBlock';
-import { SectorsSectionBlock } from './blocks/SectorsSectionBlock';
-import { ScheduleCallBlock } from './blocks/ScheduleCallBlock';
 import { PricingPlansBlock } from './blocks/PricingPlansBlock';
-import { Home03Hero } from './blocks/Home03Hero';
 import { BrandLogos } from './blocks/BrandLogos';
-import { BenefitsSectionBlock } from './blocks/BenefitsSection';
 import { FaqSectionBlock } from './blocks/FaqSection';
 import { DashboardSectionBlock } from './blocks/DashboardSection';
-import { WhatMakesUsDifferentSection } from './blocks/WhatMakesUsDifferentSection';
 import { IntegrationsSection } from './blocks/IntegrationsSection';
 import { TestimonialsSection } from './blocks/TestimonialsSection';
 import { FeaturesWithIntroSectionBlock } from './blocks/FeaturesWithIntroSectionBlock';
 import { Hero02Block } from './blocks/Hero02Block';
 import { WhyChooseUsSectionBlock } from './blocks/WhyChooseUsSectionBlock';
-import { HeroBlogCardBlock } from './blocks/HeroBlogCardBlock';
 import { RecentArticlesBlock } from './blocks/RecentArticlesBlock';
 import { ContactFormBlock } from './blocks/ContactFormBlock';
 
 const AllBlocks = [
   ContentBlock,
-  ImageBlock,
   FeatureSectionBlock,
-  ClientLogosBlock,
-  SolutionsListBlock,
-  AiSupportSectionBlock,
-  SupportNinjaSectionBlock,
-  TextImageSectionBlock,
-  ApproachTabsBlock,
-  CustomizedApproachBlock,
-  CaseStudySectionBlock,
-  CtaSectionBlock,
-  ProductFeaturesBlock,
-  SectorsSectionBlock,
-  ScheduleCallBlock,
   PricingPlansBlock,
-  Home03Hero,
   BrandLogos,
-  BenefitsSectionBlock,
   FaqSectionBlock,
   DashboardSectionBlock, // Changed DashboardSection to DashboardSectionBlock
-  WhatMakesUsDifferentSection,
   IntegrationsSection,
   TestimonialsSection,
   FeaturesWithIntroSectionBlock,
   Hero02Block,
   WhyChooseUsSectionBlock,
-  HeroBlogCardBlock,
   RecentArticlesBlock,
   ContactFormBlock,
 ];
@@ -98,7 +65,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Categories, WebPages, WikiPages, RegistryPages, NavigationCache],
+  collections: [Users, Media, Categories, WebPages, WikiPages, RegistryPages, NavigationCache, PageTemplate],
   globals: [Footer],
   editor: lexicalEditor(),
   blocks: AllBlocks,

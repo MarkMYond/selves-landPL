@@ -1,6 +1,6 @@
 import type { Block } from 'payload';
 import { linkField } from '../fields/linkField'; // Assuming you want to reuse your linkField for privacy policy
-import type { Media } from '../payload-types'; // For contentImage type
+import type { Media } from '../../../frontend/src/payload-types'; // For contentImage type
 
 export const ContactFormBlock: Block = {
   slug: 'ContactForm',

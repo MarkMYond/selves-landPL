@@ -116,7 +116,7 @@ export const FeaturesWithIntroSectionBlock: Block = {
       ),
       admin: {
         components: {
-          RowLabel: '@/admin/customComponents/FeatureItemRowLabel',
+          RowLabel: '@/blocks/FeatureItemRowLabel',
         },
       },
     },

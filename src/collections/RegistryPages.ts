@@ -3,6 +3,13 @@ import { generateRegistryNavigation } from '../hooks/generateRegistryNavigation'
 import { slugField } from '../fields/slug';
 import { seoField } from '../fields/seo';
 import ContentBlock from '../blocks/ContentBlock';
+import RegRichTextBlock from '../blocks/registry/RegRichTextBlock';
+import RegCalloutBlock from '../blocks/registry/RegCalloutBlock';
+import RegImageCarouselBlock from '../blocks/registry/RegImageCarouselBlock';
+import RegColumnsBlock from '../blocks/registry/RegColumnsBlock';
+import RegAccordionBlock from '../blocks/registry/RegAccordionBlock';
+import RegTableBlock from '../blocks/registry/RegTableBlock';
+import RegCodeBlock from '../blocks/registry/RegCodeBlock';
 
 const afterChangeHook: CollectionAfterChangeHook = async ({ req }) => {
   console.log('Registry page changed, regenerating navigation...');
@@ -56,12 +63,41 @@ const RegistryPages: CollectionConfig = {
       },
     },
     {
+      name: 'template',
+      label: 'Page Template',
+      type: 'relationship',
+  relationTo: 'page-templates',
+      required: false,
+      admin: {
+        position: 'sidebar',
+        description: 'Select a template to use for this page.'
+      }
+    },
+    {
       name: 'pageBuilder',
       label: 'Page Content',
       type: 'blocks',
       minRows: 1,
-      blocks: [ContentBlock],
+      blocks: [
+        ContentBlock,
+        RegRichTextBlock,
+        RegCalloutBlock,
+        RegImageCarouselBlock,
+        RegColumnsBlock,
+        RegAccordionBlock,
+        RegTableBlock,
+        RegCodeBlock,
+      ],
       required: true,
+      defaultValue: [
+  { blockType: 'regRichText', content: { root: { type: 'root', children: [{ type: 'paragraph', children: [] }] } } },
+  { blockType: 'regCallout', type: 'regCallout', callout: '' },
+  { blockType: 'regImageCarousel', type: 'regImageCarousel', images: [] },
+  { blockType: 'regColumns', type: 'regColumns', columns: [] },
+  { blockType: 'regAccordion', type: 'regAccordion', items: [] },
+  { blockType: 'regTable', type: 'regTable', rows: [] },
+  { blockType: 'regCode', type: 'regCode', code: '' },
+      ],
     },
     {
       name: 'status',
@@ -182,6 +218,54 @@ const RegistryPages: CollectionConfig = {
   timestamps: true,
   versions: false,
   hooks: {
+    beforeChange: [
+      async ({ data, req, operation }) => {
+        if (operation === 'create' && (!data.pageBuilder || data.pageBuilder.length === 0)) {
+          if (data.template) {
+            let templateId;
+            if (typeof data.template === 'string') {
+              templateId = data.template;
+            } else if (typeof data.template === 'object' && data.template.id) {
+              templateId = data.template.id;
+            } else {
+              console.log('[RegistryPages beforeChange] Could not determine template ID:', data.template);
+              return data;
+            }
+            try {
+              const templateDoc = await req.payload.findByID({
+                collection: 'page-templates',
+                id: templateId,
+              });
+              if (templateDoc && Array.isArray(templateDoc.blocks)) {
+                // Ensure every block has a valid blockType matching the block slug
+                data.pageBuilder = templateDoc.blocks.map(block => ({
+                  ...block,
+                  blockType: block.blockType || block.slug || block.type,
+                }));
+                console.log('[RegistryPages beforeChange] Auto-populated pageBuilder from template:', templateId);
+              } else {
+                console.log('[RegistryPages beforeChange] Template found but no blocks:', templateDoc);
+              }
+            } catch (err) {
+              console.error('[RegistryPages beforeChange] Error fetching template:', err);
+            }
+          } else {
+            // No template selected, auto-populate with all registry blocks
+            data.pageBuilder = [
+              { blockType: 'regRichText', content: '' },
+              { blockType: 'regCallout', callout: '' },
+              { blockType: 'regImageCarousel', images: [] },
+              { blockType: 'regColumns', columns: [] },
+              { blockType: 'regAccordion', items: [] },
+              { blockType: 'regTable', rows: [] },
+              { blockType: 'regCode', code: '' },
+            ];
+            console.log('[RegistryPages beforeChange] Auto-populated pageBuilder with default registry blocks and minimal values');
+          }
+        }
+        return data;
+      },
+    ],
     afterChange: [afterChangeHook],
     afterDelete: [afterDeleteHook],
   },
