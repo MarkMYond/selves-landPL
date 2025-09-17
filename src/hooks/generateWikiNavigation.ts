@@ -1,5 +1,5 @@
-import { Payload } from 'payload';
-import type { Category, WikiPage } from '../../../frontend/src/payload-types'; // Ensure WikiPage type is correctly imported
+import type { Payload } from 'payload'; // Ensure Payload type is correctly imported
+import type { Category, WikiPage } from '../payload-types'; // Import from local types
 
 interface NavItem {
   id: string;

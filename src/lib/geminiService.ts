@@ -55,11 +55,13 @@ export async function generateSeoDataWithGemini(
   existingDescription?: string,
   docSlug?: string, 
 ): Promise<GeminiFullResponse> {
+  const SITE_NAME = process.env.SITE_NAME || 'Site'
+  const SITE_URL = (process.env.SITE_URL || 'http://localhost:3000').replace(/\/$/, '')
   if (!model || !API_KEY) {
     console.log('Using mock SEO data due to missing API key or model initialization failure.');
     return {
       seo_metadata: {
-        title: `Mock: ${simplifiedPageTitle || textBlocks.substring(0, 30)} for Agent-Ready Hospitality | Taash`,
+  title: `Mock: ${simplifiedPageTitle || textBlocks.substring(0, 30)} | ${SITE_NAME}`,
         description: `Mock description: ${textBlocks.substring(0, 120)}...`,
         keywords: ['mock', 'seo', 'data'],
       },
@@ -74,9 +76,9 @@ export async function generateSeoDataWithGemini(
   const prompt = `
 CRITICAL RULE: Your entire response MUST be a single, raw JSON object. Do not include any other text or explanations. Your response must start with { and end with }.
 
-You are an SEO expert for Taash. Your task is to generate a JSON object based on the provided inputs and the strict rules below, which are derived directly from the taash.ai website.
+You are an SEO expert for ${SITE_NAME}. Your task is to generate a JSON object based on the provided inputs and the strict rules below, which are derived directly from the ${SITE_URL} website.
 
-GUARDRAIL: Taash is ALWAYS a B2B travel technology infrastructure company that connects venues (like hotels) to AI agents. It is NEVER a chatbot company or a generic AI service. All generated content must reflect this core identity.
+GUARDRAIL: ${SITE_NAME} is ALWAYS a B2B travel technology infrastructure company that connects venues (like hotels) to AI agents. It is NEVER a chatbot company or a generic AI service. All generated content must reflect this core identity.
 
 --- Input ---
 
@@ -88,12 +90,12 @@ ${textBlocks.substring(0, 4000)}
 --- GENERATION PROCESS & RULES ---
 
 1. Generate seo_metadata.title (Mandatory Formula):
-You MUST generate the seo_metadata.title by following this exact formula: [Simplified Page Title] for Agent-Ready Hospitality | Taash
+You MUST generate the seo_metadata.title by following this exact formula: [Simplified Page Title] | ${SITE_NAME}
 
 * The [Simplified Page Title] part of the formula is the exact string provided in the "pageTitle" input field above. Use it verbatim.
 * Identify the main benefit or core theme in the Webpage Content relevant to a venue owner and create a short [Benefit Phrase] (e.g., "AI Direct Bookings", "Data-Driven Revenue", "Fixing Travel Infrastructure"). This phrase must be unique to the Webpage Content.
-* Construct the final seo_metadata.title string by LITERALLY concatenating: the "pageTitle" input + " for Agent-Ready Hospitality | Taash".
-* The result MUST be between 50-70 characters. You might need to adjust the "pageTitle" input slightly if it's exceptionally long to meet this, but prioritize using it as directly as possible. The fixed suffix " for Agent-Ready Hospitality | Taash" is mandatory.
+* Construct the final seo_metadata.title string by LITERALLY concatenating: the "pageTitle" input + " | ${SITE_NAME}".
+* The result MUST be between 50-70 characters. You might need to adjust the "pageTitle" input slightly if it's exceptionally long to meet this. The fixed suffix " | ${SITE_NAME}" is recommended.
 
 2. Generate All Other Content
 
@@ -119,10 +121,10 @@ Combine all generated fields into the JSON structure below.
     "@type": "Article",
     "headline": "Unique Headline Without Colons Reflecting Page Content",
     "description": "A unique schema description summarising the specific article.",
-    "author": { "@type": "Organization", "name": "Taash" },
-    "publisher": { "@type": "Organization", "name": "Taash", "logo": { "@type": "ImageObject", "url": "https://taash.ai/logo.svg" } },
+  "author": { "@type": "Organization", "name": "${SITE_NAME}" },
+  "publisher": { "@type": "Organization", "name": "${SITE_NAME}", "logo": { "@type": "ImageObject", "url": "${SITE_URL}/logo.svg" } },
     "datePublished": "${new Date().toISOString().split('T')[0]}",
-    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://taash.ai/${docSlug || 'your-unique-page-url'}" },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "${SITE_URL}/${docSlug || 'your-unique-page-url'}" },
     "articleBody": "A detailed and faithful summary of the Webpage Content provided, using brand vocabulary."
   }
 }

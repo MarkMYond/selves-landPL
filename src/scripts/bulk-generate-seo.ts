@@ -14,9 +14,10 @@ import { generateSeoDataWithGemini } from '../lib/geminiService';
 
 // Helper function to simplify page titles based on specific rules
 function simplifyPageTitle(originalTitle: string, webPageContent: string): string {
+  const SITE_NAME = process.env.SITE_NAME || 'Site'
   const lowerTitle = originalTitle.toLowerCase();
-  if (lowerTitle === 'about') return 'About Taash';
-  if (lowerTitle === 'contact') return 'Contact Taash';
+  if (lowerTitle === 'about') return `About ${SITE_NAME}`;
+  if (lowerTitle === 'contact') return `Contact ${SITE_NAME}`;
   if (originalTitle === '1.1 Retrospective') return 'Travel Infrastructure Retrospective'; // Keep case for specific match
   if (originalTitle === '1.1.5 Manager / Owner Key Insights') return 'Venue Owner Insights'; // Keep case
 
@@ -27,7 +28,7 @@ function simplifyPageTitle(originalTitle: string, webPageContent: string): strin
     const words = extractTextFromBlocks([{ type: 'text', children: [{ text: webPageContent }] }]) // Simulate block structure for extraction
       .split(/\s+/)
       .filter(word => word.length > 3); // Filter out very short words
-    return words.slice(0, 5).join(' ') || 'Taash Page'; // Fallback if no suitable words
+  return words.slice(0, 5).join(' ') || `${SITE_NAME} Page`; // Fallback if no suitable words
   }
 
   // Otherwise, use the original title, possibly slightly rephrased if very long/awkward

@@ -238,7 +238,7 @@ const RegistryPages: CollectionConfig = {
               });
               if (templateDoc && Array.isArray(templateDoc.blocks)) {
                 // Ensure every block has a valid blockType matching the block slug
-                data.pageBuilder = templateDoc.blocks.map(block => ({
+                data.pageBuilder = templateDoc.blocks.map((block: any) => ({
                   ...block,
                   blockType: block.blockType || block.slug || block.type,
                 }));

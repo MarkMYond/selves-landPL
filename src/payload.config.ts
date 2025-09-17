@@ -14,6 +14,9 @@ import { createDigitalOceanAdapter } from './lib/digitalOceanAdapter'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
+import Hotels from './collections/Hotels'
+import Restaurants from './collections/Restaurants'
+import Experiences from './collections/Experiences'
 import Categories from './collections/Categories'
 import WebPages from './collections/WebPages'
 import WikiPages from './collections/WikiPages'
@@ -24,6 +27,7 @@ import PageTemplate from './collections/PageTemplate'
 import Footer from './globals/Footer'
 
 import { generateSeoEndpoint } from './endpoints/generate-seo'; // Import the new endpoint
+import roomEndpoint from './endpoints/room'; // Import the room endpoint
 
 import ContentBlock from './blocks/ContentBlock';
 import { FeatureSectionBlock } from './blocks/FeatureSectionBlock';
@@ -65,13 +69,14 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Categories, WebPages, WikiPages, RegistryPages, NavigationCache, PageTemplate],
+  collections: [Users, Media, Hotels, Restaurants, Experiences, Categories, WebPages, WikiPages, RegistryPages, NavigationCache, PageTemplate],
   globals: [Footer],
   editor: lexicalEditor(),
   blocks: AllBlocks,
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
-    outputFile: path.resolve(dirname, '../../frontend/src/payload-types.ts'),
+    // Generate types locally for Payload to avoid pulling the frontend types into Next's TS program
+    outputFile: path.resolve(dirname, './payload-types.ts'),
   },
   db: mongooseAdapter({
     url: process.env.DATABASE_URI || '',
@@ -160,24 +165,24 @@ export default buildConfig({
       },
     },
     generateSeoEndpoint, // Add the new endpoint here
+    roomEndpoint, // Add the room endpoint
   ],
-  cors: [
-    'http://localhost:3000',
-    'http://localhost:3001', // Add Nuxt dev server origin
-    process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:3333',
-    'https://taash-payld.vercel.app',
-    'https://fetest-bay.vercel.app',
-    'https://frontend-cyan-nine-80.vercel.app',
-    'https://taash.ai',
-    '*',
-  ],
-  csrf: [
-    'http://localhost:3000',
-    'http://localhost:3001', // Add Nuxt dev server origin
-    process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:3333',
-    'https://taash-payld.vercel.app',
-    'https://fetest-bay.vercel.app',
-    'https://frontend-cyan-nine-80.vercel.app',
-    'https://taash.ai',
-  ],
+  cors: (
+    process.env.PAYLOAD_ALLOWED_ORIGINS
+      ? process.env.PAYLOAD_ALLOWED_ORIGINS.split(',').map(o => o.trim()).filter(Boolean)
+      : [
+          'http://localhost:3000',
+          'http://localhost:3001',
+          process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:3333',
+        ]
+  ),
+  csrf: (
+    process.env.PAYLOAD_CSRF_ORIGINS
+      ? process.env.PAYLOAD_CSRF_ORIGINS.split(',').map(o => o.trim()).filter(Boolean)
+      : [
+          'http://localhost:3000',
+          'http://localhost:3001',
+          process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:3333',
+        ]
+  ),
 })
