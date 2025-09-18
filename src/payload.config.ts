@@ -173,6 +173,8 @@ export default buildConfig({
       : [
           'http://localhost:3000',
           'http://localhost:3001',
+          'https://selves.uk',
+          'https://www.selves.uk',
           process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:3333',
         ]
   ),
@@ -182,6 +184,8 @@ export default buildConfig({
       : [
           'http://localhost:3000',
           'http://localhost:3001',
+          'https://selves.uk',
+          'https://www.selves.uk',
           process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:3333',
         ]
   ),
